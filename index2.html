@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Generator Application </title>
+    <style>
+        @keyframes moveBackground {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 100% 100%;
+    }
+}
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url('gg3.jpg'); /* Add your image here */
+            background-size: cover;
+            background-position: center;
+            margin: 0;
+            animation: moveBackground 4s linear infinite;
+        }
+        .wrapper {
+            text-align: center;
+            background-color: white;
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-image: url('gg.jpg'); /* Add background image to the container */
+            background-size: cover;
+            background-position: center;
+            width: 500px;  /* Increased width */
+            height: 400px; /* Increased height */
+            max-width: 90%; /* Ensures responsiveness */
+            max-height: 90%; 
+            max-height: 90%;
+            overflow: hidden;
+            outline: 4px solid hotpink; /* Adding a solid blue outline */
+            outline-offset: 2px; /* Space between outline and element */
+}
+    
+
+        h1 {
+            font-size: 30px;
+            font-style: italic;
+            margin-bottom: 10px;
+            color:hotpink;
+        }
+        p {
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+        .form {
+            margin-bottom: 20px;
+        }
+        .form input {
+            padding: 10px;
+            width: 80%;
+            font-size: 18px;
+            border: 1px black;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        .form button {
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            background-color:darkorchid;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .form button:hover {
+            background-color: #0056b3;
+        }
+        .qr-code {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 50%; /* Ensure it takes up all available height */
+        }
+        .qr-code img {
+            max-width: 100%;
+            height: auto;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+            <h1>QR Code Generator</h1>
+            <p style="color:lightpink;">Paste the URL/Text here</p>
+
+        </header>
+        <div class="form">
+            <input type="text" id="text-input" placeholder="Enter text or URL">
+            <button onclick="generateQRCode()">Generate QR Code</button>
+        </div>
+        <div class="qr-code">
+            <img id="qr-code-img" decoding="async" src="" alt="qr-code">
+        </div>
+    </div>
+
+    <script>
+        function generateQRCode() {
+            const text = document.getElementById('text-input').value;
+            const qrCodeImg = document.getElementById('qr-code-img');
+
+            if (text.trim() !== "") {
+                qrCodeImg.src =  `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(text)}&color=ff69b4&bgcolor=6a0dad`;
+                qrCodeImg.style.display = 'block';
+            } else {
+                qrCodeImg.style.display = 'none';
+                alert('Please enter a valid URL or text.');
+            }
+        }
+    </script>
+</body>
+</html>
